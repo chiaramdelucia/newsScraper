@@ -8,20 +8,25 @@ module.exports = function(app){
 
 		request('http://www.nj.com/beer/', function(err, response, html){
 			if (err) throw err;
-
+		
 			var $ = cheerio.load(html);
 
 			var result = [];
+			console.log(result);
 
 
-            $('item-text').each(function(i, element) {
-                var link = $(element).find('a').attr('href');
-                var title = $(element).find('a').attr('href').text();
+            $('div.h2.fullheadline').each(function(i, element) {
+                var link = $(element).children().attr('href');
+                var title = $(element).children().text();
+                console.log(link);
+                console.log(title);
+
 
                 result.push({
                     title: title,
                     link: link,
                 });
+                console.log(result);
 
 			});
 
